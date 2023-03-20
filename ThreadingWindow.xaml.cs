@@ -111,6 +111,14 @@ namespace SystemProgramming_111
         {
             isStoped4 = true;
             ButtonStart4.IsEnabled = true;
+            if (Convert.ToInt32(progressBar4.Value) == 100)
+            {
+                ButtonStart4.Content = "Start";
+            }
+            else
+            {
+                ButtonStart4.Content = "Resume";
+            }
         }
         private void Start4(object? startIndex)
         {
@@ -139,6 +147,14 @@ namespace SystemProgramming_111
                 this.Dispatcher.Invoke(() =>
                 {
                     ButtonStart4.IsEnabled = true;
+                    if (Convert.ToInt32(progressBar4.Value) == 100)
+                    {
+                        ButtonStart4.Content = "Start";
+                    }
+                    else
+                    {
+                        ButtonStart4.Content = "Resume";
+                    }
                 });
             }
             /*
