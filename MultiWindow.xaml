@@ -1,0 +1,114 @@
+﻿<Window x:Class="SystemProgramming_111.MultiWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemProgramming_111"
+        mc:Ignorable="d"
+        Title="MultiWindow" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1">
+            <TextBlock  x:Name="ConsoleBlock"
+                        Margin="5"
+                       ></TextBlock>
+        </Border>
+        <StackPanel
+            Orientation="Vertical"
+            >
+            <Label Content="1. Проблема: все даные одинаковы" ></Label>
+            <DockPanel
+                Height="20"
+                Margin="10 20"
+            >
+                <Button 
+                    Margin="0 0 10 0"
+                    DockPanel.Dock="Left"
+                    x:Name="ButtonStart1"
+                    Content="Start" Width="40" Click="ButtonStart1_Click"></Button>
+                <Button
+                    Margin="10 0 0 0"
+                    DockPanel.Dock="Right"
+                    x:Name="ButtonStop1"
+                    Content="Stop" Width="40" Click="ButtonStop1_Click"></Button>
+                <ProgressBar x:Name="progressBar1" Maximum="12"></ProgressBar>
+            </DockPanel>
+
+            <Label Content="2. Проблема: нет паралельности (долго)" ></Label>
+            <DockPanel
+                Height="20"
+                Margin="10 20"
+            >
+                <Button 
+                    Margin="0 0 10 0"
+                    DockPanel.Dock="Left"
+                    x:Name="ButtonStart2"
+                    Content="Start" Width="40" Click="ButtonStart2_Click"></Button>
+                <Button
+                    Margin="10 0 0 0"
+                    DockPanel.Dock="Right"
+                    x:Name="ButtonStop2"
+                    Content="Stop" Width="40" Click="ButtonStop2_Click"></Button>
+                <ProgressBar x:Name="progressBar2" Maximum="12"></ProgressBar>
+            </DockPanel>
+
+            <Label Content="3. Проблема: не по порядку" ></Label>
+            <DockPanel
+                Height="20"
+                Margin="10 20"
+            >
+                <Button 
+                    Margin="0 0 10 0"
+                    DockPanel.Dock="Left"
+                    x:Name="ButtonStart3"
+                    Content="Start" Width="40" Click="ButtonStart3_Click"></Button>
+                <Button
+                    Margin="10 0 0 0"
+                    DockPanel.Dock="Right"
+                    x:Name="ButtonStop3"
+                    Content="Stop" Width="40" Click="ButtonStop3_Click"></Button>
+                <ProgressBar x:Name="progressBar3" Maximum="12"></ProgressBar>
+            </DockPanel>
+
+            <Label Content="4. Проблема: остановка потоков" ></Label>
+            <DockPanel
+                Height="20"
+                Margin="10 20"
+            >
+                <Button 
+                    Margin="0 0 10 0"
+                    DockPanel.Dock="Left"
+                    x:Name="ButtonStart4"
+                    Content="Start" Width="40" Click="ButtonStart4_Click"></Button>
+                <Button
+                    Margin="10 0 0 0"
+                    DockPanel.Dock="Right"
+                    x:Name="ButtonStop4"
+                    Content="Stop" Width="40" Click="ButtonStop4_Click"></Button>
+                <ProgressBar x:Name="progressBar4" Maximum="12"></ProgressBar>
+            </DockPanel>
+            <Label>5. Пул потоков
+            </Label>
+            <DockPanel
+                Height="20"
+                Margin="10 20"
+            >
+                <Button 
+                    Margin="0 0 10 0"
+                    DockPanel.Dock="Left"
+                    x:Name="ButtonStart5"
+                    Content="Start" Width="40" Click="ButtonStart5_Click"></Button>
+                <Button
+                    Margin="10 0 0 0"
+                    DockPanel.Dock="Right"
+                    x:Name="ButtonStop5"
+                    Content="Stop" Width="40" Click="ButtonStop5_Click"></Button>
+                <ProgressBar x:Name="progressBar5"></ProgressBar>
+            </DockPanel>
+        </StackPanel>
+       
+    </Grid>
+</Window>

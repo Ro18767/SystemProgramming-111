@@ -1,0 +1,34 @@
+﻿<Window x:Class="SystemProgramming_111.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemProgramming_111"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <Label Content="Системное Програмирование" 
+               HorizontalAlignment="Center"
+               Margin="0 10"
+               FontSize="18"
+               FontWeight="DemiBold"></Label>
+        <Button x:Name="Threading" Content="1. Многопоточность"
+                Margin="10" Padding="10 5"
+                FontSize="18" HorizontalContentAlignment="Left" Click="Threading_Click"></Button>
+        <Button x:Name="Multi" Content="2. Синхонизация"
+                Margin="10" Padding="10 5"
+                FontSize="18" HorizontalContentAlignment="Left" Click="Multi_Click"></Button>
+        <Button x:Name="Task" Content="3. Многозадачность"
+                Margin="10" Padding="10 5"
+                FontSize="18" HorizontalContentAlignment="Left" Click="Task_Click"></Button>
+
+        <Button x:Name="Synhro" Content="4. Объекты Синхронизации"
+                Margin="10" Padding="10 5"
+                FontSize="18" HorizontalContentAlignment="Left" Click="Synhro_Click"></Button>
+
+
+        <Button x:Name="Process" Content="5. Объекты Синхронизации"
+                Margin="10" Padding="10 5"
+                FontSize="18" HorizontalContentAlignment="Left" Click="Process_Click"></Button>
+    </StackPanel>
+</Window>
