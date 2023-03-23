@@ -30,5 +30,8 @@
         <Button x:Name="Process" Content="5. Объекты Синхронизации"
                 Margin="10" Padding="10 5"
                 FontSize="18" HorizontalContentAlignment="Left" Click="Process_Click"></Button>
+        <Button x:Name="Dll" Content="6. DLL / Dynamic Link Library"
+                Margin="10" Padding="10 5"
+                FontSize="18" HorizontalContentAlignment="Left" Click="Dll_Click"></Button>
     </StackPanel>
 </Window>

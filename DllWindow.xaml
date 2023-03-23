@@ -1,0 +1,82 @@
+﻿<Window x:Class="SystemProgramming_111.DllWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemProgramming_111"
+        mc:Ignorable="d"
+        Title="DllWindow" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel
+            Orientation="Vertical"
+            >
+            <StackPanel
+            Orientation="Horizontal"
+            >
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgA"
+                    Content="MsgA"  Click="ButtonMsgA_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgW"
+                    Content="MsgW"  Click="ButtonMsgW_Click"></Button>
+
+            </StackPanel>
+            <StackPanel
+            Orientation="Horizontal"
+            >
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgCustom1"
+                    Content="MsgRetry"  Click="ButtonMsgCustom1_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgCustom2"
+                    Content="MsgError"  Click="ButtonMsgCustom2_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgCustom3"
+                    Content="MsgInfo"  Click="ButtonMsgCustom3_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgCustom4"
+                    Content="MsgInfo"  Click="ButtonMsgCustom4_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonMsgCustom5"
+                    Content="MsgAsk"  Click="ButtonMsgCustom5_Click"></Button>
+            </StackPanel>
+            <StackPanel
+            Orientation="Horizontal"
+            >
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonBeep1"
+                    Content="beep1"  Click="ButtonBeep1_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonBeep2"
+                    Content="beep2"  Click="ButtonBeep2_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="ButtonBeep3"
+                    Content="beep3"  Click="ButtonBeep3_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
