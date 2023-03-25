@@ -104,10 +104,7 @@ namespace SystemProgramming_111
         }
 
 
-        private double sum3;
-        private readonly object locker3 = new();
-
-
+        #region variant 3
         private void ButtonStart3_Click(object sender, RoutedEventArgs e)
         {
             sum3 = 100;
@@ -123,27 +120,41 @@ namespace SystemProgramming_111
 
         }
 
-        private void plusPercent3(object? param)
-        {
-            if (param is not int) return;
-            int month = (int)param;
-            double val;
-            double percent = 10 + month;
-            double factor = 1 + percent / 100;
-            Thread.Sleep(Random.Next(250, 350));
+        private double sum3;
+        private readonly object locker3 = new();     // объект для синхронизации
 
-            lock (locker3)
+        private void plusPercent3(object? month)
+        {
+            if (month is not int) return;
+
+            double val;
+
+            for (int i = 0; i < 10; i++)
             {
-                val = sum3;
-                val *= factor;
-                sum3 = val;
+                Thread.Sleep(random.Next(250, 350));   // часть рассчетов, 
+                // место для возможной отмены потока
             }
 
-            Dispatcher.Invoke(() => {
+            double percent = 10 + (int)month;      // вынесенная
+            double factor = 1 + percent / 100;     // за синхроблок
+
+            lock (locker3)
+            {                                      // внутри блока
+                val = sum3;                        // остается часть рассчетов
+                val *= factor;                     // которую нельзя более
+                sum3 = val;                        // разделять
+            }
+
+            Dispatcher.Invoke(() =>
+            {
                 ConsoleBlock.Text += month + " " + percent + " " + val + "\n";
-                progressBar3.Value += 1;
+                progressBar3.Value += 100.0 / 12;
             });
         }
+
+        #endregion
+
+
 
 
         private double sum4;

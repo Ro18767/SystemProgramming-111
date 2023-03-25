@@ -1,7 +1,7 @@
 # SystemProgramming-111
 
 
-1. клик на beep3
+1. клик на старт
 
-![name](./Screenshot/Screenshot_5.png)
+![name](./Screenshot/Screenshot_6.png)
 
