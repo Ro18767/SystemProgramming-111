@@ -27,6 +27,8 @@ namespace SystemProgramming_111
         {
             InitializeComponent();
         }
+        #region DllFunctions
+
         [DllImport("User32.dll")]
         public static extern
     int MessageBoxA(
@@ -161,7 +163,8 @@ bool Sound(uint dwFreq, uint dwDuration);
             if (res)
             {
                 Warn("Действие подтверждено");
-            } else
+            }
+            else
             {
                 ErrorAlert("Действие отменено");
             }
@@ -187,5 +190,94 @@ bool Sound(uint dwFreq, uint dwDuration);
             if (t == null) return;
             t.Start();
         }
+        [DllImport("Kernel32.dll", EntryPoint = "CreateThread")]
+        public static extern
+            IntPtr CreateThread(
+                    IntPtr lpThreadAttributes,  // указатель на структуру с параметрами безопасности (NULL)
+                    uint dwStackSize,         // граничный размер стека - 0 (по умолчанию)
+              ThreadMethod lpStartAddress,      // указатель на стартовый адрес (функции)
+                    IntPtr lpParameter,         // указатель на объект с параметрами для ф-ции
+                    uint dwCreationFlags,     // флаги запуска - 0 (по умолчанию)
+                    IntPtr lpThreadId           // возврат id потока (NULL - не возвращать)
+            );
+        // главный вопрос - как получить адрес метода в .NET и передать его в неуправляемый код
+        // 1. Описываем делегат по документации на функцию (CreateThread)
+        public delegate void ThreadMethod();
+        // 2. Заменяем IntPtr в декларации ф-ции на делегат ThreadMethod
+        // 3. Описываем метод с сигнатурой делегата
+        public void SayHello()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                SayHelloLabel.Content = "tewg";
+            });
+        }
+
+        private void SayHelloBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateThread(IntPtr.Zero, 0, SayHello, IntPtr.Zero, 0, IntPtr.Zero);
+
+        }
+        // 4. При вызове ф-ции CreateThread в параметре lpStartAddress указываем SayHello
+        //    (см. )
+        #endregion DllFunctions
+
+        #region Timer
+        delegate void TimerMethod(uint uTimerId, uint uMsg, ref uint dsUser, uint dw1, uint dw2);
+
+        [DllImport("winmm.dll", EntryPoint = "timeSetEvent")]
+        static extern uint TimeSetEvent(
+            uint uDelay,
+            uint uResolution,
+            TimerMethod lpTimeProc,
+            ref uint dwUser,
+            uint eventType
+            );
+
+        [DllImport("winmm.dll", EntryPoint = "timeKillEvent")]
+        static extern uint TimeKillEvent(uint uTimerID);
+
+        const uint TIME_ONESHOT = 0;
+        const uint TIME_PERIODIC = 1;
+
+        uint uDelay;
+        uint uResolution;
+        uint timerId;
+        uint dwUser;
+        TimerMethod timerMethod = null!;
+        GCHandle timerHandle;
+
+        int ticks;
+
+        void TimerTick(uint uTimerId, uint uMsg, ref uint dsUser, uint dw1, uint dw2)
+        {
+            ticks++;
+            Dispatcher.Invoke(() =>
+            {
+                TicksLabel.Content = ticks.ToString();
+            });
+        }
+
+        private void StartTimerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            uDelay = 100; // 100 mc
+            uResolution = 10;
+            ticks = 0;
+            dwUser = 0;
+            timerMethod = new TimerMethod(TimerTick);
+            timerHandle = GCHandle.Alloc(timerMethod);
+            timerId = TimeSetEvent(uDelay, uResolution, timerMethod, ref dwUser, TIME_PERIODIC);
+        }
+
+        private void StopTimerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TimeKillEvent(timerId);
+            timerId = 0;
+            timerHandle.Free();
+        }
+
+        #endregion Timer
+
+
     }
 }

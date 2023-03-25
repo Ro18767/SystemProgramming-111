@@ -77,6 +77,31 @@
                     x:Name="ButtonBeep3"
                     Content="beep3"  Click="ButtonBeep3_Click"></Button>
             </StackPanel>
+            <StackPanel
+            Orientation="Horizontal"
+            >
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="SayHelloBtn"
+                    Content="Threed"  Click="SayHelloBtn_Click"></Button>
+                <Label x:Name="SayHelloLabel" Content="" ></Label>
+            </StackPanel>
+            <StackPanel
+            Orientation="Horizontal"
+            >
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="StartTimerBtn"
+                    Content="StartTimerBtn"  Click="StartTimerBtn_Click"></Button>
+                <Button 
+                    Margin="10"
+                    Padding="10"
+                    x:Name="StopTimerBtn"
+                    Content="StopTimerBtn"  Click="StopTimerBtn_Click"></Button>
+                <Label x:Name="TicksLabel" Content="" ></Label>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
