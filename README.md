@@ -1,7 +1,7 @@
 # SystemProgramming-111
 
 
-1. клик на старт
+1. клик на старт и потом стоп
 
-![name](./Screenshot/Screenshot_6.png)
+![name](./Screenshot/Screenshot_7.png)
 
