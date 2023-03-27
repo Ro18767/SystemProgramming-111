@@ -97,6 +97,24 @@
                     Content="Demo5" 
                      Click="Demo5_2_Click"></Button>
             </StackPanel>
+            <Label>3. Пул потоков в асинхронном виде
+            </Label>
+            <DockPanel
+                Height="20"
+                Margin="10 20"
+            >
+                <Button 
+                    Margin="0 0 10 0"
+                    DockPanel.Dock="Left"
+                    x:Name="ButtonStart5"
+                    Content="Start" Width="40" Click="ButtonStart5_Click"></Button>
+                <Button
+                    Margin="10 0 0 0"
+                    DockPanel.Dock="Right"
+                    x:Name="ButtonStop5"
+                    Content="Stop" Width="40" Click="ButtonStop5_Click"></Button>
+                <ProgressBar x:Name="progressBar5"></ProgressBar>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>
