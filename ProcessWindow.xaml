@@ -48,6 +48,7 @@
                 <Button  Content="Запустить броузер" x:Name="StartB"
                          Margin="5" Padding="7 2 7 4"
                          Click="StartB_Click" ></Button>
+                <TextBox Width="150" Text="" x:Name="bUrlTextBox"></TextBox>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -108,13 +109,29 @@ namespace SystemProgramming_111
         Process p;
         private void StartNotepad_Click(object sender, RoutedEventArgs e)
         {
-            var p = Process.Start("notepad.exe");
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var p = Process.Start("notepad.exe", openFileDialog.FileName);
+            } else
+            {
+                var p = Process.Start("notepad.exe");
+            }
+                
         }
 
         Process b;
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            var b = Process.Start(@"C:\Program Files\Google\Chrome\Application\chrome.exe", @"https://youtu.be/dQw4w9WgXcQ");
+           
+            string myString = bUrlTextBox.Text;
+            if (myString == String.Empty)
+            {
+                var p = Process.Start(@"C:\Program Files\Google\Chrome\Application\chrome.exe", myString);
+            } else
+            {
+                var p = Process.Start(@"C:\Program Files\Google\Chrome\Application\chrome.exe");
+            }
         }
     }
 }
