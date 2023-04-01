@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SystemProgramming_111"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="DllWindow" Height="450" Width="800">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
@@ -99,7 +100,7 @@
                     Margin="10"
                     Padding="10"
                     x:Name="StopTimerBtn"
-                    Content="StopTimerBtn"  Click="StopTimerBtn_Click"></Button>
+                    Content="StopTimerBtn"  Click="StopTimerBtn_Click" IsEnabled="False"></Button>
                 <Label x:Name="TicksLabel" Content="" ></Label>
             </StackPanel>
         </StackPanel>

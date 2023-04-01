@@ -222,8 +222,11 @@ bool Sound(uint dwFreq, uint dwDuration);
         //    (см. )
         #endregion DllFunctions
 
-        #region Timer
-        delegate void TimerMethod(uint uTimerId, uint uMsg, ref uint dsUser, uint dw1, uint dw2);
+
+        #region MM Timer
+        // делегат для передачи адреса периодически вызываемого метода
+        delegate void TimerMethod(uint uTimerID, uint uMsg, ref uint dwUser,
+            uint dw1, uint dw2);
 
         [DllImport("winmm.dll", EntryPoint = "timeSetEvent")]
         static extern uint TimeSetEvent(
@@ -235,48 +238,75 @@ bool Sound(uint dwFreq, uint dwDuration);
             );
 
         [DllImport("winmm.dll", EntryPoint = "timeKillEvent")]
-        static extern uint TimeKillEvent(uint uTimerID);
+        static extern void TimeKillEvent(uint uTimerID);
 
-        const uint TIME_ONESHOT = 0;
+        const uint TIME_ONESHOT = 0;  // eventType
         const uint TIME_PERIODIC = 1;
 
         uint uDelay;
         uint uResolution;
         uint timerId;
-        uint dwUser;
+        uint dwUser = 0;
         TimerMethod timerMethod = null!;
         GCHandle timerHandle;
 
         int ticks;
-
-        void TimerTick(uint uTimerId, uint uMsg, ref uint dsUser, uint dw1, uint dw2)
+        void TimerTick(uint uTimerID, uint uMsg, ref uint dwUser, uint dw1, uint dw2)
         {
             ticks++;
-            Dispatcher.Invoke(() =>
-            {
-                TicksLabel.Content = ticks.ToString();
-            });
+
+            var now = DateTime.Now;
+            var hours = now.Hour;
+            var minutes = now.Minute;
+            var seconds = now.Second;
+            var milliseconds = now.Millisecond;
+            Dispatcher.Invoke(() => { TicksLabel.Content = $"{hours.ToString("00")}:{minutes.ToString("00")}:{seconds.ToString("00")}.{(milliseconds / 10).ToString("00")}"; });
         }
 
         private void StartTimerBtn_Click(object sender, RoutedEventArgs e)
         {
-            uDelay = 100; // 100 mc
-            uResolution = 10;
+            uDelay = 10;      // задержка между вызовами 10 ms (10 Hz)
+            uResolution = 10;  // допустимое отклонение (погрешность) для uDelay
             ticks = 0;
-            dwUser = 0;
             timerMethod = new TimerMethod(TimerTick);
             timerHandle = GCHandle.Alloc(timerMethod);
             timerId = TimeSetEvent(uDelay, uResolution, timerMethod, ref dwUser, TIME_PERIODIC);
+            if (timerId != 0)
+            {
+                StopTimerBtn.IsEnabled = true;
+                StartTimerBtn.IsEnabled = false;
+            }
+            else
+            {
+                timerHandle.Free();
+                timerMethod = null!;
+            }
         }
 
         private void StopTimerBtn_Click(object sender, RoutedEventArgs e)
         {
-            TimeKillEvent(timerId);
-            timerId = 0;
-            timerHandle.Free();
+            StopTimer();
         }
+        private void StopTimer()
+        {
+            TimeKillEvent(timerId);
+            timerHandle.Free();
+            StopTimerBtn.IsEnabled = false;
+            StartTimerBtn.IsEnabled = true;
+        }
+        /* Мультимедийный таймер:
+         * Добавить событие закрытия окна, в нем проверить активность таймера - 
+         *  если активный, то выключить (и освободить объект)
+         * Реализовать "часы-таймер" в форме 00:00:00.00 (чч:мм:сс.дс)
+         * дс - две цифры для сотых долей секунды
+         * Запустить таймер с интервалом 10 мс, обработать его тики в виде времени
+         */
 
-        #endregion Timer
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            StopTimer();
+        }
+        #endregion
 
 
     }
